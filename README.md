@@ -17,10 +17,6 @@ This repo provides a dockerized deployment of [autoware mini](https://github.com
     
     docker compose up carla_sim
 
-## To run autoware mini
-   
-    docker compose up autoware_mini
-
 If the docker-based carla deployment does not work, start CARLA on your host. Extract the CARLA 0.9.13 archive to ```/home/carla/``` and execute the following commands manually once inside the folder.
 
 ```bash
@@ -28,12 +24,15 @@ bash cp <path to Tartu.tar.gz> /home/carla/Import
 bash chmod +x ./ImportAssets.sh
 bash ./ImportAssets.sh
 ```
-
 Start then the carla server:
 
 ```bash
 bash ./CarlaUE4.sh -RenderOffScreen --world-port=2000
 ```
+
+## To run autoware mini
+   
+    docker compose up autoware_mini
 
 ## To customize starting script for autoware_mini
 
