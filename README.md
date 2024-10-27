@@ -7,7 +7,12 @@ This repo provides a dockerized deployment of [autoware mini](https://github.com
   1. Download  [Tartu.tar.gz]( https://drive.google.com/file/d/10CHEOjHyiLJgD13g6WwDZ2_AWoLasG2F/view?usp=share_link)  and place it inside `carlar0_9_13` folder 
   2. Download [Carla 0.9.13](https://carla-releases.s3.eu-west-3.amazonaws.com/Linux/CARLA_0.9.13.tar.gz) and extract PythonAPI folder and place it inside `autoware_mini/CARLA_ROOT/`
   3. Download [Autoware Mini]() and place it inside `autoware_mini/AUTOWARE_MINI/`
-  4. Download [Scenario Runner]() and place it in `autoware_mini/SCENARIO_RUNNER/`. Upgrade shapely version from requirements.txt file in scenario runner to 2.0, because this is the minimum shapely version autoware mini supports.
+  4. Download [Scenario Runner]() and place it in `autoware_mini/SCENARIO_RUNNER/` using:
+  ``` bash
+  git clone -b route_scenario https://github.com/UT-ADL/scenario_runner.git
+  ```
+
+   Upgrade shapely version from requirements.txt file in scenario runner to 2.0, because this is the minimum shapely version autoware mini supports.
 
 ## To build containers
 
@@ -20,17 +25,19 @@ This repo provides a dockerized deployment of [autoware mini](https://github.com
 If the docker-based carla deployment does not work, start CARLA on your host. Extract the CARLA 0.9.13 archive to ```/home/carla/``` and execute the following commands manually once inside the folder.
 
 ```bash
-bash cp <path to Tartu.tar.gz> /home/carla/Import
-bash chmod +x ./ImportAssets.sh
+cp <path to Tartu.tar.gz> /home/carla/Import
+chmod +x ./ImportAssets.sh
 bash ./ImportAssets.sh
 ```
-Start then the carla server:
+Start then the carla server in one terminal:
 
 ```bash
 bash ./CarlaUE4.sh -RenderOffScreen --world-port=2000
 ```
 
 ## To run autoware mini
+
+Open another terminal and run:
    
     docker compose up autoware_mini
 
@@ -66,7 +73,7 @@ services:
         roslaunch autoware_mini start_carla.launch use_scenario_runner:=true
 ```
 
-Consider available starting options explained in the autoware mini docs.
+Consider available starting options explained in the [autoware mini docs](https://github.com/UT-ADL/autoware_mini?tab=readme-ov-file#launching-with-scenario-runner).
 
 ## FAQs
 
