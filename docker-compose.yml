@@ -1,0 +1,70 @@
+version: '3.1'
+services:
+  autoware_mini:
+    stdin_open: true
+    #command: ["bash"]
+    command:
+      - "bash"
+      - "-c"
+      - >
+        source /opt/catkin_ws/devel/setup.bash &&
+        roslaunch autoware_mini start_carla.launch use_scenario_runner:=true
+    build:
+      context: ${PWD}/autoware_mini
+      dockerfile: Dockerfile
+      args: 
+          - PROCESS_COUNT=${PROCESS_COUNT}
+          - DISPLAY=:1
+          - QT_X11_NO_MITSHM=1
+          - NVIDIA_DRIVER_CAPABILITIES=all
+          - XAUTHORITY=/tmp/.docker.xauth
+    environment:
+      - PYTHONPATH=/opt/CARLA_ROOT/PythonAPI/carla/dist/carla-0.9.13-py3.7-linux-x86_64.egg:/opt/CARLA_ROOT/PythonAPI/carla/agents:/opt/CARLA_ROOT/PythonAPI/carla
+      - CARLA_ROOT=/opt/CARLA_ROOT
+      - DISPLAY=:1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.Xauthority:/root/.Xauthority
+      - /home/lev/Documents/autoware_mini_docker_compose/autoware_mini/SCENARIO_RUNNER:/opt/SCENARIO_RUNNER
+    image: "prathap/autoware_mini:v0.1"
+    container_name: autoware_mini 
+    network_mode: "host"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+  carla_sim:
+    stdin_open: true
+    #command: ["bash"]
+    command: ["bash","./CarlaUE4.sh", "-RenderOffScreen", "--world-port=2000"]
+    privileged: true 
+    build:
+      context: ${PWD}/carlar0_9_13
+      dockerfile: Dockerfile
+      args: 
+          - PROCESS_COUNT=${PROCESS_COUNT}
+          - DISPLAY=$DISPLAY
+          - QT_X11_NO_MITSHM=1
+          - NVIDIA_DRIVER_CAPABILITIES=all
+          - XAUTHORITY=/tmp/.docker.xauth
+    ports:
+      - "2000-2002:2000-2002"
+    volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix
+        - ~/.Xauthority:/root/.Xauthority
+    image: "prathap/carla_sim:v0.9.13"
+    container_name: carla_sim 
+    network_mode: "host"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:2000"] 
+      interval: 30s
+      timeout: 10s
+      retries: 5

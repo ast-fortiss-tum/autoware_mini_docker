@@ -1,0 +1,5 @@
+**/Tartu.tar.gz
+**/*.bak
+autoware_mini/AUTOWARE_MINI/*
+autoware_mini/CARLA_ROOT/*
+autoware_mini/SCENARIO_RUNNER/*
