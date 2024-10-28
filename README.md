@@ -2,8 +2,12 @@
 # Autoware Mini Docker
 
 This repo provides a dockerized deployment of [autoware mini](https://github.com/UT-ADL/autoware_mini) with carla and is based on the code [here](https://github.com/UT-ADL/autoware_mini/files/11582192/autoware_mini_docker_compose.zip).
+ 
 
 ## Prerequisite
+
+Install [docker compose](https://docs.docker.com/compose/install/). Then download repositories which will be later mounted or copied into the containers.
+
   1. Download  [Tartu.tar.gz]( https://drive.google.com/file/d/10CHEOjHyiLJgD13g6WwDZ2_AWoLasG2F/view?usp=share_link)  and place it inside `carlar0_9_13` folder 
   2. Download [Carla 0.9.13](https://carla-releases.s3.eu-west-3.amazonaws.com/Linux/CARLA_0.9.13.tar.gz) and extract PythonAPI folder and place it inside `autoware_mini/CARLA_ROOT/`
   3. Download [Autoware Mini]() and place it inside `autoware_mini/AUTOWARE_MINI/`
@@ -77,7 +81,7 @@ Consider available starting options explained in the [autoware mini docs](https:
 
 ## FAQs
 
-- Check that the DISPLAY variable is correctly set
+- Check that the DISPLAY variable is correctly set.
 
 ## TODO
 
