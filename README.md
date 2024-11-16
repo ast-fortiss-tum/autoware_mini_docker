@@ -10,8 +10,8 @@ Install [docker compose](https://docs.docker.com/compose/install/). Then downloa
 
   1. Download  [Tartu.tar.gz]( https://drive.google.com/file/d/10CHEOjHyiLJgD13g6WwDZ2_AWoLasG2F/view?usp=share_link)  and place it inside `carlar0_9_13` folder 
   2. Download [Carla 0.9.13](https://carla-releases.s3.eu-west-3.amazonaws.com/Linux/CARLA_0.9.13.tar.gz) and extract PythonAPI folder and place it inside `autoware_mini/CARLA_ROOT/`
-  3. Download [Autoware Mini]() and place it inside `autoware_mini/AUTOWARE_MINI/`
-  4. Download [Scenario Runner]() and place it in `autoware_mini/SCENARIO_RUNNER/` using:
+  3. Download [Autoware Mini](https://github.com/UT-ADL/autoware_mini) and place it inside `autoware_mini/AUTOWARE_MINI/`
+  4. Download Scenario Runner and place it in `autoware_mini/SCENARIO_RUNNER/` using:
   ``` bash
   git clone -b route_scenario https://github.com/UT-ADL/scenario_runner.git
   ```
@@ -86,6 +86,7 @@ Consider available starting options explained in the [autoware mini docs](https:
 ```bash
 xhost +local:
 ```
+- In case of problems accessing the GPU from the container, make sure that the nvidia container toolkit is installed and nvidia drivers are up-to-date.
 
 ## TODO
 
