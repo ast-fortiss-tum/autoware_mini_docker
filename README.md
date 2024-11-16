@@ -82,6 +82,10 @@ Consider available starting options explained in the [autoware mini docs](https:
 ## FAQs
 
 - Check that the DISPLAY variable is correctly set.
+- Check that permission are available to acces display. Give access by:
+```bash
+xhost +local:
+```
 
 ## TODO
 
